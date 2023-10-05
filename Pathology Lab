@@ -1,0 +1,58 @@
+package Pack;
+
+import static org.junit.Assert.*;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.Select;
+
+public class Pathology {
+	WebDriver driver;
+
+	@Before
+	public void setUp() throws Exception {
+        // Set the path to your Driver executable
+		System.setProperty("webdriver.gecko.driver", "C:\\Eclipse Workspace\\Drivers\\geckodriver.exe");
+		
+        // Initialize WebDriver
+		driver = new FirefoxDriver();
+        
+		// Open the Pathology Lab Management System website
+		driver.get("https://gor-pathology.web.app/");
+		driver.manage().window().maximize();
+	}
+
+	@After
+	public void tearDown() throws Exception {
+		Thread.sleep(3000);
+		//driver.quit();
+	}
+
+	@Test
+	public void test() throws InterruptedException {
+		driver.findElement(By.name("email")).sendKeys("test@kennect.io");
+		driver.findElement(By.name("password")).sendKeys("Qwerty@1234");
+		driver.findElement(By.xpath("/html/body/div[2]/div/div/form/button[1]")).click();
+		Thread.sleep(3000);
+		
+		WebElement dropdownElement = driver.findElement(By.name("Add tests for patient")); // Change the locator as per your HTML
+
+        // Create a Select object
+        Select label = new Select(dropdownElement);
+
+        // Select an option by visible text
+        label.selectByVisibleText("Option 1");
+
+       
+
+        // Select an option by value attribute
+      //  dropdown.selectByValue("value3");		
+
+	}
+
+}
